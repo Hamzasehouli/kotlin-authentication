@@ -31,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
         auth = FirebaseAuth.getInstance()
         email = findViewById(R.id.email_input)
         password = findViewById(R.id.password_input)
@@ -40,12 +41,21 @@ class LoginActivity : AppCompatActivity() {
         loginBtn.setOnClickListener {
             var enteredEmail = email.text.toString()
             var enteredPassword = email.text.toString()
+
+            if(enteredEmail == "" || enteredPassword ==""){
+                println("ff")
+                Toast.makeText(this@LoginActivity, "Please enter the required fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             auth.signInWithEmailAndPassword(enteredEmail, enteredPassword)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+
                         startActivity(Intent(this, MainActivity::class.java))
                     } else {
-                        Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
+                        println("error")
+                        Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
