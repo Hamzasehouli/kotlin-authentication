@@ -1,6 +1,8 @@
 package com.example.chatapp
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -84,7 +86,6 @@ class SignupActivity : AppCompatActivity() {
 
             client.newCall(request).enqueue(object: Callback {
                 override fun onResponse(call: Call, response: Response) {
-                    println("success")
 
                     val body = response.body?.string()
 
@@ -94,8 +95,20 @@ class SignupActivity : AppCompatActivity() {
                     )
                     var gson = GsonBuilder().create()
                     var user = gson.fromJson(body, User::class.java)
-                    println(user.message)
-                    println(user.token)
+
+                    if(user.status == "success"){
+                        val sharedPref = getSharedPreferences("Auth",Context.MODE_PRIVATE)
+
+                        with (sharedPref.edit()) {
+                            putString("email", user.email)
+                            putString("token", user.token)
+                            putBoolean("isLoggedin", user.isLoggedin)
+                            commit()
+                        }
+                        startActivity(Intent(this@SignupActivity, MainActivity::class.java))
+
+                    }
+
                 }
 
                 override fun onFailure(call: Call, e: IOException) {

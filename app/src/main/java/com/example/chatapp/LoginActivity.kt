@@ -1,5 +1,6 @@
 package com.example.chatapp
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,10 +22,17 @@ class LoginActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if(currentUser != null){
-            startActivity(Intent(this,MainActivity::class.java))
+
+        val sharedPref =getApplicationContext().getSharedPreferences("Auth",Context.MODE_PRIVATE)
+
+
+        val isLoggedin = sharedPref.getBoolean("isLoggedin", false)
+
+
+        if(isLoggedin){
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
         }
+
     }
 
 
