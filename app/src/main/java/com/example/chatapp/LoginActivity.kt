@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
             var enteredPassword = password.text.toString()
             println(enteredPassword)
 
-            if(enteredEmail == "" || enteredPassword ==""){
+            if(enteredEmail == "" || enteredPassword =="" || enteredPassword.length<8 || !enteredEmail.contains("@", ignoreCase = true)){
                 Toast.makeText(this@LoginActivity, "Please enter the required fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

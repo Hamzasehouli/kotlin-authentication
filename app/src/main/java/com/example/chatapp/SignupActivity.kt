@@ -18,6 +18,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.IOException
 
+
 class SignupActivity : AppCompatActivity() {
     private lateinit var name: EditText
     private lateinit var email: EditText
@@ -49,7 +50,7 @@ class SignupActivity : AppCompatActivity() {
             var enteredEmail = email.text.toString()
             var enteredPassword = password.text.toString()
 
-            if(enteredEmail == "" || enteredPassword =="" || enteredName == ""){
+            if(enteredEmail == "" || enteredPassword.length<8 || enteredPassword =="" || enteredName == "" || !enteredEmail.contains("@", ignoreCase = true)){
                 Toast.makeText(this@SignupActivity, "Please enter the required fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -106,44 +107,7 @@ class SignupActivity : AppCompatActivity() {
                 }
             })
 
-            /////////////
 
-//            var client = OkHttpClient()
-//
-//
-//                val request = Request.Builder()
-//                    .url("https://fakestoreapi.com/products").build()
-//
-//                        client.newCall(request).enqueue(object: Callback {
-//                            override fun onResponse(call: Call, response: Response) {
-//                                val body = response.body?.string()
-//                                println(body)
-//                            }
-//
-//                            override fun onFailure(call: Call, e: IOException) {
-//                                println("fail")
-//                    }
-//                })
-
-
-
-
-
-            ////////////
-
-
-
-//            auth.createUserWithEmailAndPassword(enteredEmail, enteredPassword)
-//                .addOnCompleteListener(this) { task ->
-//                    if (task.isSuccessful) {
-//                        println("success")
-//                        startActivity(Intent(this, MainActivity::class.java))
-//
-//                    } else {
-//                        println("fail")
-//                        Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
 
         }
 
