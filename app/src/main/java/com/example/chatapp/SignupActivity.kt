@@ -27,16 +27,6 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var url: String
 
-//    public override fun onStart() {
-//        super.onStart()
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        val currentUser = auth.currentUser
-//        if(currentUser != null){
-//            startActivity(Intent(this,MainActivity::class.java))
-//        }
-//    }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +47,7 @@ class SignupActivity : AppCompatActivity() {
         signupBtn.setOnClickListener {
             var enteredName = name.text.toString()
             var enteredEmail = email.text.toString()
-            var enteredPassword = email.text.toString()
+            var enteredPassword = password.text.toString()
 
             if(enteredEmail == "" || enteredPassword =="" || enteredName == ""){
                 Toast.makeText(this@SignupActivity, "Please enter the required fields", Toast.LENGTH_SHORT).show()
